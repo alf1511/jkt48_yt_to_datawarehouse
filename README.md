@@ -41,5 +41,5 @@ This project automates the transfer of data from YouTube to a local PostgreSQL d
 4. Access the Airflow and PgAdmin UI:
 
    Access **localhost:8080** for the Airflow UI and **localhost:5050** for the PgAdmin
-   > **Note** <br><br> Make sure to modify the `API_KEY` in `jkt48_yt_s3_to_postgresql.py`, besides that make sure to coresponding connections through Airflow UI.
+   > **Note** <br><br> Make sure to modify the `API_KEY` in `jkt48_yt_s3_to_postgresql.py`, besides that make sure to register the required connections (AWS Service and PostgreSQL) through Airflow UI.
    
