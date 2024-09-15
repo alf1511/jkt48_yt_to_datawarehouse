@@ -1,5 +1,7 @@
 # JKT48 YouTube Video Data | ETL with Apache Airflow
 
+![image](https://github.com/user-attachments/assets/f53df9ef-b8e9-4908-ab28-b7a385156f1a)
+
 ## Project Description
 This project automates the transfer of data from YouTube to a local PostgreSQL data warehouse using Apache Airflow. It involves creating two DAGs (Directed Acyclic Graphs). The first DAG is responsible for extracting and transforming YouTube video data, which is achieved using the YouTube Data API v3 and Python. The second DAG monitors the S3 bucket for the presence of a specific key file. If the file is found, it triggers the S3-to-PostgreSQL loading process. This is accomplished using the S3KeySensor object.
 
