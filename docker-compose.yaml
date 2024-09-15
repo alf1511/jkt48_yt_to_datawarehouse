@@ -1,0 +1,42 @@
+services:
+  commit-airflow:
+    image: commit-airflow:latest
+    container_name: commit-airflow
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@commit-postgres/airflow
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@commit-postgres/airflow
+      - AIRFLOW__WEBSERVER__RBAC=True
+    volumes:
+      - ./airflow:/opt/airflow
+    ports:
+      - '8080:8080'
+    command: airflow standalone
+    depends_on:
+      - commit-postgres
+
+  commit-postgres:
+    image: postgres:13
+    container_name: commit-postgres
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - commit-postgres
+
+volumes:
+  postgres_data:
